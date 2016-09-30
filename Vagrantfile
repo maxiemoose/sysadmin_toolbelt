@@ -47,7 +47,9 @@ Vagrant.configure(2) do |config|
       end
 
     config.vm.provision "shell", inline: <<-SHELL
+        chmod 600 /home/ubuntu/.ssh/authorized_keys
         echo "#{ssh_public_key}" >> /home/ubuntu/.ssh/authorized_keys
+        chmod 400 /home/ubuntu/.ssh/authorized_keys
       SHELL
 
       #config.vm.provision :ansible do |ansible|
