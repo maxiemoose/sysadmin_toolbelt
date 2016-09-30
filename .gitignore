@@ -1,0 +1,9 @@
+ec2.ini
+*.swp
+*.log
+*.retry
+*.pem
+.*
+!.gitignore
+.vagrant
+.DS_Store
