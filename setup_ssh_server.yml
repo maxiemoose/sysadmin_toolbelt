@@ -1,5 +1,13 @@
 ---
+- hosts: ubuntu16.04
+  gather_facts: false
+  become: yes
+  become_method: sudo
+  roles:
+    - python2
+
 - hosts: all_hosts
+  gather_facts: true
   become: yes
   become_method: sudo
   roles:

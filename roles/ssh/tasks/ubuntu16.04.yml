@@ -3,14 +3,13 @@
 ##
 
 ---
-
 - name: Install SSH server
   apt: name={{ item }} state=present
   with_items:
     - openssh-server
   when:
     ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_distribution_release == 'xenial'
 
 - name: set Permit root login to "no"
   lineinfile:
@@ -22,6 +21,6 @@
     - { setting: '^PasswordAuthentication', value: 'PasswordAuthentication no' }
   when:
     ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_distribution_release == 'xenial'
   notify:
   - restart ssh
