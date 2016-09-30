@@ -4,18 +4,18 @@
 # Define virtualbox boxes
 boxes = [
     {
-        :name => "srv-ubuntu",
+        :name => "srv-ubuntu14",
         :eth1 => "192.168.50.100",
-        :mem => "4096",
+        :mem => "1024",
         :cpu => "2",
         :os => "ubuntu/trusty64",
     },
     {
-        :name => "srv-centos",
+        :name => "srv-ubuntu16",
         :eth1 => "192.168.50.101",
-        :mem => "4096",
+        :mem => "1024",
         :cpu => "2",
-        :os => "centos/7",
+        :os => "ubuntu/xenial64",
     }
 ]
 
@@ -47,10 +47,7 @@ Vagrant.configure(2) do |config|
       end
 
     config.vm.provision "shell", inline: <<-SHELL
-        mkdir /root/.ssh
-        touch /root/.ssh/authorized_keys
-        echo "#{ssh_public_key}" >> /root/.ssh/authorized_keys
-        chmod 640 /root/.ssh/authorized_keys
+        echo "#{ssh_public_key}" >> /home/vagrant/.ssh/authorized_keys
       SHELL
 
       #config.vm.provision :ansible do |ansible|
