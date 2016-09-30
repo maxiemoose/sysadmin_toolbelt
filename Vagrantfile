@@ -7,14 +7,14 @@ boxes = [
         :name => "srv-ubuntu14",
         :eth1 => "192.168.50.100",
         :mem => "1024",
-        :cpu => "2",
+        :cpu => "1",
         :os => "ubuntu/trusty64",
     },
     {
         :name => "srv-ubuntu16",
         :eth1 => "192.168.50.101",
         :mem => "1024",
-        :cpu => "2",
+        :cpu => "1",
         :os => "ubuntu/xenial64",
     }
 ]
@@ -47,9 +47,7 @@ Vagrant.configure(2) do |config|
       end
 
     config.vm.provision "shell", inline: <<-SHELL
-        chmod 600 /home/ubuntu/.ssh/authorized_keys
         echo "#{ssh_public_key}" >> /home/ubuntu/.ssh/authorized_keys
-        chmod 400 /home/ubuntu/.ssh/authorized_keys
       SHELL
 
       #config.vm.provision :ansible do |ansible|
