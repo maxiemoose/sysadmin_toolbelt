@@ -1,0 +1,9 @@
+##
+## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
+##
+
+---
+- include: ubuntu14.04.yml
+- include: ubuntu16.04.yml
+- include: centos7.yml
+- include: debian8.yml
