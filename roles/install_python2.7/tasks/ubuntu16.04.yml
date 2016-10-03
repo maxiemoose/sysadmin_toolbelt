@@ -1,0 +1,7 @@
+##
+## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
+##
+
+---
+- name: Install Python
+  raw: sudo apt-get install -y python

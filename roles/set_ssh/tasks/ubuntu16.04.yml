@@ -1,0 +1,26 @@
+##
+## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
+##
+
+---
+- name: Install SSH server
+  apt: name={{ item }} state=present
+  with_items:
+    - openssh-server
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'xenial'
+
+- name: set Permit root login to "no"
+  lineinfile:
+    dest=/etc/ssh/sshd_config
+    regexp={{ item.setting }}
+    line={{ item.value }}
+  with_items:
+    - { setting: '^PermitRootLogin', value: 'PermitRootLogin no' }
+    - { setting: '^PasswordAuthentication', value: 'PasswordAuthentication no' }
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'xenial'
+  notify:
+  - restart ssh
