@@ -4,11 +4,11 @@
   become: yes
   become_method: sudo
   roles:
-    - python2
+    - install_python2.7
 
 - hosts: all_hosts
   gather_facts: true
   become: yes
   become_method: sudo
   roles:
-    - ssh
+    - set_ssh

@@ -1,8 +1,0 @@
-##
-## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
-##
-
----
-
-- name: restart ssh
-  service: name=ssh state=restarted
