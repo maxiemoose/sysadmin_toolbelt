@@ -3,3 +3,12 @@
 ##
 
 ---
+- name: take sudo privileges from sudo user
+  user:
+    name={{ item.user }}
+    groups=
+  with_items:
+    - user_list
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'

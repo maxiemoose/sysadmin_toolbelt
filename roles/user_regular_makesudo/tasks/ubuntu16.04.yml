@@ -3,3 +3,12 @@
 ##
 
 ---
+- name: give sudo privileges to regular user
+  user:
+    name={{ item.user }}
+    group=sudo
+  with_items:
+    - user_list
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'xenial'
