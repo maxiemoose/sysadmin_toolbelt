@@ -1,0 +1,15 @@
+---
+#- hosts: ubuntu16.04
+#  gather_facts: false
+#  become: yes
+#  become_method: sudo
+#  roles:
+#    - install_python2.7
+
+- hosts: all_hosts
+  gather_facts: true
+  become: yes
+  become_method: sudo
+  roles:
+    - user_regular_create
+    - user_sudo_create

@@ -3,14 +3,14 @@
 ##
 
 ---
-- name: remove sudo user
+- name: remove regular user
   user:
     name={{ item.user }}
     state=absent
     move_home=yes
     home=/dev/null
-  with_items:
-    - user_list
+  with_file:
+    - users_list
   when:
     ansible_distribution == 'Ubuntu' and
     ansible_distribution_release == 'xenial'

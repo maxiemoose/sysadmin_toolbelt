@@ -3,16 +3,24 @@
 ##
 
 ---
-- name: add user with sudo privileges
+- name: add user with regular privileges
   user:
-    name={{ item.user }}
+    name={{ item }}
     state=present
     update_password=on_create
     createhome=yes
     password=$6$rounds=656000$.25MqRZ2JsYVB/2w$g7YrmTT9.GQu24iSsuG26aSGVjVSgWkvJJUZe0a1Zuq5MR5UBYSz5NMW.U.SCN1KkTZd3v3RstKHbTOiXnayW.
-    group=sudo
-  with_items:
-    - user_list
+  with_items: "{{ regular_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'
+
+- name: add user with sudo privileges
+  user:
+    name={{ item }}
+    state=present
+    groups=sudo
+  with_items: "{{ sudo_users }}"
   when:
     ansible_distribution == 'Ubuntu' and
     ansible_distribution_release == 'trusty'

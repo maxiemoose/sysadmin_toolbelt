@@ -9,8 +9,8 @@
     state=absent
     move_home=yes
     home=/dev/null
-  with_items:
-    - user_list
+  with_file:
+    - users_list
   when:
     ansible_distribution == 'Ubuntu' and
     ansible_distribution_release == 'trusty'
