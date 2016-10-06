@@ -5,12 +5,11 @@
 ---
 - name: remove regular user
   user:
-    name={{ item.user }}
+    name={{ item }}
     state=absent
     move_home=yes
     home=/dev/null
-  with_file:
-    - users_list
+  with_items: "{{ remove_users }}"
   when:
     ansible_distribution == 'Ubuntu' and
     ansible_distribution_release == 'trusty'

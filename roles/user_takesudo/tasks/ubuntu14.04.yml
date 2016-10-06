@@ -3,12 +3,34 @@
 ##
 
 ---
-- name: take sudo privileges from sudo user
+- name: remove user with sudo privileges
   user:
-    name={{ item.user }}
-    groups=
-  with_file:
-    - users_list
+    name={{ item }}
+    state=absent
+  with_items: "{{ takesudo_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'
+
+- name: add user with regular privileges
+  user:
+    name={{ item }}
+    state=present
+    home=/home/{{ item }}
+    update_password=on_create
+    password=$6$rounds=656000$.25MqRZ2JsYVB/2w$g7YrmTT9.GQu24iSsuG26aSGVjVSgWkvJJUZe0a1Zuq5MR5UBYSz5NMW.U.SCN1KkTZd3v3RstKHbTOiXnayW.
+  with_items: "{{ takesudo_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'
+
+- name: change ownership of home directory
+  file:
+    dest=/home/{{ item }}
+    owner={{ item }}
+    group={{ item }}
+    recurse=yes
+  with_items: "{{ takesudo_users }}"
   when:
     ansible_distribution == 'Ubuntu' and
     ansible_distribution_release == 'trusty'

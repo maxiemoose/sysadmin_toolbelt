@@ -5,13 +5,44 @@
 ---
 - name: add user with regular privileges
   user:
-    name={{ item.user }}
+    name={{ item }}
     state=present
     update_password=on_create
     createhome=yes
     password=$6$rounds=656000$.25MqRZ2JsYVB/2w$g7YrmTT9.GQu24iSsuG26aSGVjVSgWkvJJUZe0a1Zuq5MR5UBYSz5NMW.U.SCN1KkTZd3v3RstKHbTOiXnayW.
-  with_file:
-    - users_list
+  with_items: "{{ regular_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'xenial'
+
+- name: create .ssh folder for users
+  file:
+    path=/home/{{ item }}/.ssh state=directory
+    owner={{ item }}
+    group={{ item }}
+  with_items: "{{ regular_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'xenial'
+
+- name: copy key files to remote host
+  copy:
+    src=keys/{{ item }}.key
+    dest=/home/{{ item }}/.ssh/authorized_keys
+    owner={{ item }}
+    group={{ item }}
+    mode=0600
+  with_items: "{{ regular_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'xenial'
+
+- name: add user with sudo privileges
+  user:
+    name={{ item }}
+    state=present
+    groups=sudo
+  with_items: "{{ sudo_users }}"
   when:
     ansible_distribution == 'Ubuntu' and
     ansible_distribution_release == 'xenial'

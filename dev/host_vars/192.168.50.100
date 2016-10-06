@@ -11,3 +11,9 @@ regular_users:
 sudo_users:
   - user3
   - user4
+
+remove_users:
+#  - user2
+
+takesudo_users:
+#  - user3

@@ -15,6 +15,28 @@
     ansible_distribution == 'Ubuntu' and
     ansible_distribution_release == 'trusty'
 
+- name: create .ssh folder for users
+  file:
+    path=/home/{{ item }}/.ssh state=directory
+    owner={{ item }}
+    group={{ item }}
+  with_items: "{{ regular_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'
+
+- name: copy key files to remote host
+  copy:
+    src=keys/{{ item }}.key
+    dest=/home/{{ item }}/.ssh/authorized_keys
+    owner={{ item }}
+    group={{ item }}
+    mode=0600
+  with_items: "{{ regular_users }}"
+  when:
+    ansible_distribution == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'
+
 - name: add user with sudo privileges
   user:
     name={{ item }}
