@@ -9,11 +9,11 @@
     state=present
     update_password=on_create
     createhome=yes
-    password=$6$rounds=656000$.25MqRZ2JsYVB/2w$g7YrmTT9.GQu24iSsuG26aSGVjVSgWkvJJUZe0a1Zuq5MR5UBYSz5NMW.U.SCN1KkTZd3v3RstKHbTOiXnayW.
+    password={{ password }}
   with_items: "{{ regular_users }}"
   when:
-    ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'
 
 - name: create .ssh folder for users
   file:
@@ -22,8 +22,8 @@
     group={{ item }}
   with_items: "{{ regular_users }}"
   when:
-    ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'
 
 - name: copy key files to remote host
   copy:
@@ -34,15 +34,15 @@
     mode=0600
   with_items: "{{ regular_users }}"
   when:
-    ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'
 
-- name: add user with sudo privileges
+- name: promote user to sudo
   user:
     name={{ item }}
     state=present
     groups=sudo
   with_items: "{{ sudo_users }}"
   when:
-    ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'

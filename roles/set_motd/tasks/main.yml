@@ -3,3 +3,5 @@
 ##
 
 ---
+- include: deb_family.yml
+- include: centos7.yml

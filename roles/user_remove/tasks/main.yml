@@ -3,7 +3,5 @@
 ##
 
 ---
-- include: ubuntu14.04.yml
-- include: ubuntu16.04.yml
 - include: centos7.yml
-- include: debian8.yml
+- include: deb_family.yml

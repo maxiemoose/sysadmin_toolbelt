@@ -16,6 +16,13 @@ boxes = [
         :mem => "1024",
         :cpu => "1",
         :os => "ubuntu/xenial64",
+    },
+   {
+        :name => "srv-debian8",
+        :eth1 => "192.168.50.102",
+        :mem => "1024",
+        :cpu => "1",
+        :os => "debian/jessie64",
     }
 ]
 

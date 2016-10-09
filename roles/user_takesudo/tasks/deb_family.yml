@@ -9,8 +9,8 @@
     state=absent
   with_items: "{{ takesudo_users }}"
   when:
-    ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'
 
 - name: add user with regular privileges
   user:
@@ -21,8 +21,8 @@
     password=$6$rounds=656000$.25MqRZ2JsYVB/2w$g7YrmTT9.GQu24iSsuG26aSGVjVSgWkvJJUZe0a1Zuq5MR5UBYSz5NMW.U.SCN1KkTZd3v3RstKHbTOiXnayW.
   with_items: "{{ takesudo_users }}"
   when:
-    ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'
 
 - name: change ownership of home directory
   file:
@@ -32,5 +32,5 @@
     recurse=yes
   with_items: "{{ takesudo_users }}"
   when:
-    ansible_distribution == 'Ubuntu' and
-    ansible_distribution_release == 'trusty'
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'

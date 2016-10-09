@@ -1,0 +1,24 @@
+##
+## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
+##
+
+---
+- name: copy motd file to remote host
+  template:
+    src=motd.j2
+    dest=/etc/motd
+    owner=root
+    group=root
+    mode=0644
+#  when:
+#    ansible_distribution == 'Ubuntu' and
+#    ansible_distribution == 'Debian'
+
+- name: remove default motd
+  apt:
+    name=landscape-common
+    state=absent
+    purge=yes
+  when:
+    ansible_distribution == 'Ubuntu' or
+    ansible_distribution == 'Debian'

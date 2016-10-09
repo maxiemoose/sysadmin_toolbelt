@@ -4,5 +4,10 @@
 [ubuntu16.04]
 192.168.50.101
 
+[debian8]
+192.168.50.102
+
 [all_hosts:children]
 ubuntu14.04
+ubuntu16.04
+debian8
