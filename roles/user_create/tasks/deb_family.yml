@@ -9,7 +9,7 @@
     state=present
     update_password=on_create
     createhome=yes
-    password={{ password }}
+    password=$6$rounds=656000$JvzO1U8V2mnqM.oC$boQquZkR2k1QggItV0A4HJ5mQehYiyxEWjExJhIrBz6kce9IA01c5BW1BiM43TQp22iUVN/dtjySvwJA2MEnG1
   with_items: "{{ regular_users }}"
   when:
     ansible_os_family == 'Ubuntu' or
