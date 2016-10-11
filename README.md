@@ -70,6 +70,7 @@ If all went well we can now deploy our playbook by executing
 
 ```bash
 ansible-playbook -i dev/hosts setup_ssh_server.yml
+```
 
 ## How it works ##
 
