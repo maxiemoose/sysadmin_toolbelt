@@ -1,0 +1,19 @@
+---
+ansible_host: 192.168.50.103
+ansible_user: vagrant
+
+regular_users:
+  - user1
+  - user2
+  - user3
+  - user4
+
+sudo_users:
+  - user3
+  - user4i
+
+remove_users:
+#  - user2
+
+takesudo_users:
+#  - user3

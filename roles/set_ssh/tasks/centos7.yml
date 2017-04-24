@@ -3,3 +3,23 @@
 ##
 
 ---
+
+- name: Install SSH server
+  yum: name={{ item }} state=present
+  with_items:
+    - openssh-server
+  when:
+    ansible_distribution == 'CentOS'
+
+- name: set Permit root login to "no" and disable password authentication
+  lineinfile:
+    dest=/etc/ssh/sshd_config
+    regexp={{ item.setting }}
+    line={{ item.value }}
+  with_items:
+    - { setting: '^#PermitRootLogin', value: 'PermitRootLogin no' }
+    - { setting: '^PasswordAuthentication', value: 'PasswordAuthentication no' }
+  when:
+    ansible_distribution == 'CentOS'
+  notify:
+  - restart ssh

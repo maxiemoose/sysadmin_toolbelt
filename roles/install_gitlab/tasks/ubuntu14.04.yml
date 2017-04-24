@@ -1,0 +1,30 @@
+##
+## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
+##
+
+---
+- name: install necessary dependencies
+  apt: name={{ item }} state=present
+  with_items:
+    - curl
+    - ca-certificates
+    - postfix
+  when:
+    ansible_os_family == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'
+
+- name: download gitlab omnibus package
+  get_url:
+    url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh
+    dest: /etc/tmp/
+  when:
+    ansible_os_family == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'
+
+- name: install gitlab from package
+  apt:
+    name=gitlab-ce
+    state=present
+  when:
+    ansible_os_family == 'Ubuntu' and
+    ansible_distribution_release == 'trusty'

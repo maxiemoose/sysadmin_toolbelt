@@ -1,0 +1,19 @@
+---
+ansible_host: 10.100.0.155
+ansible_user: root
+
+regular_users:
+  - michal.tomczuk
+  - karol.tomczuk
+  - bruce.yinhe
+
+sudo_users:
+  - michal.tomczuk
+  - karol.tomczuk
+  - bruce.yinhe
+
+remove_users:
+#  - user2
+
+takesudo_users:
+#  - user3

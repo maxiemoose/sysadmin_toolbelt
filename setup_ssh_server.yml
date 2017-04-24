@@ -4,7 +4,7 @@
   become: yes
   become_method: sudo
   roles:
-    - install_python2.7
+#    - install_python2.7
 
 - hosts: all_hosts
   gather_facts: true
@@ -13,6 +13,6 @@
   roles:
     - set_ssh
     - user_create
-    - user_remove
-    - user_takesudo
+#    - user_remove
+#    - user_takesudo
     - set_motd

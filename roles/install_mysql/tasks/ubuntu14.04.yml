@@ -1,0 +1,17 @@
+##
+## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
+##
+
+---
+
+- name: Install MySQL database
+  apt:
+     name={{ item }}
+     state=present
+    update_cache=yes
+  with_items:
+    - mysql-server
+    - php5-mysql
+  when:
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'

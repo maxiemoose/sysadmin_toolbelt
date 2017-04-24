@@ -1,0 +1,14 @@
+##
+## author: Karol Tomczuk <karol.tomczuk@zerodowntime.pl>
+##
+
+---
+- name: install Apache
+  apt:
+     name=apache2
+    state=present
+    update_cache=yes
+  when:
+    ansible_os_family == 'Ubuntu' or
+    ansible_os_family == 'Debian'
+

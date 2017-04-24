@@ -1,0 +1,5 @@
+---
+- hosts: vsphere
+  gather_facts: false
+  roles:
+    - vsphere_create_vm

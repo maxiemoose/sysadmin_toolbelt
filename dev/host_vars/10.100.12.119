@@ -1,0 +1,21 @@
+---
+ansible_host: 10.100.12.119
+ansible_user: ubuntu
+
+regular_users:
+  - michal.tomczuk
+  - karol.tomczuk
+  - dmytro.lytovchenko
+  - ignacio.mendizabal
+
+sudo_users:
+  - michal.tomczuk
+  - karol.tomczuk
+  - dmytro.lytovchenko
+  - ignacio.mendizabal
+
+remove_users:
+#  - user2
+
+takesudo_users:
+#  - user3
